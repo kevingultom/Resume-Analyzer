@@ -73,17 +73,16 @@ const LANGUAGE_NAMES: Record<Language, string> = {
 
 function buildSystemPrompt(language: Language): string {
   const languageName = LANGUAGE_NAMES[language];
-  return `You are an expert technical recruiter and career coach with 15+ years of experience reviewing resumes across tech, business, and creative industries.
+  return `You are an expert technical recruiter. Analyze the resume text and return a structured evaluation. Be concise and specific — short sentences, no filler.
 
-Analyze the resume text provided by the user and return a structured evaluation. Be honest, specific, and constructive:
-- Scores must be integers from 0-100.
-- Feedback must reference concrete details from the resume (mention actual roles, skills, or gaps you noticed), not generic advice.
-- "strengths" should list 3-6 concrete positive points.
-- "improvements" should list 3-6 actionable, specific suggestions.
-- "suitable_roles" should list 3-6 realistic job titles that fit the candidate's background.
-- Write ALL text values (feedback, strengths, improvements, suitable_roles) in ${languageName}, regardless of what language the resume itself is written in. Job titles in "suitable_roles" may keep standard English industry terms if that is the common convention (e.g. "Software Engineer"), but all sentences must be in ${languageName}.
+- Scores are integers 0-100.
+- Each section feedback: 1-2 sentences max, referencing concrete details from the resume.
+- "strengths": exactly 3-4 short bullet points.
+- "improvements": exactly 3-4 short bullet points.
+- "suitable_roles": exactly 3-4 job titles.
+- Write all text values in ${languageName}. Job titles may keep standard English industry terms (e.g. "Software Engineer").
 
-Respond ONLY with JSON matching the required schema. Do not include markdown formatting or commentary.`;
+Respond ONLY with JSON matching the schema. No markdown, no commentary, no preamble.`;
 }
 
 function getClient() {
@@ -107,13 +106,16 @@ export async function analyzeResumeText(
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema,
+      maxOutputTokens: 1500,
     },
   });
 
-  const truncatedText = resumeText.slice(0, 20000);
+  // Most resumes are well under this; capping keeps the request fast without
+  // losing signal (Gemini free-tier latency scales with input size).
+  const truncatedText = resumeText.slice(0, 8000);
 
   const result = await model.generateContent(
-    `Here is the resume text extracted from a PDF:\n\n"""\n${truncatedText}\n"""\n\nAnalyze it and return the JSON evaluation.`
+    `Resume text:\n"""\n${truncatedText}\n"""\n\nReturn the JSON evaluation.`
   );
 
   const raw = result.response.text();

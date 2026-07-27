@@ -60,10 +60,23 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
         body: formData,
       });
 
-      const data = await res.json();
+      let data: unknown;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error(
+          res.status === 504 || res.status === 502
+            ? t.errorTimeout
+            : t.errorGeneric
+        );
+      }
 
       if (!res.ok) {
-        throw new Error(data?.error || t.errorGeneric);
+        const message =
+          typeof data === "object" && data && "error" in data
+            ? String((data as { error: unknown }).error)
+            : t.errorGeneric;
+        throw new Error(message);
       }
 
       onResult(data as AnalysisResult);

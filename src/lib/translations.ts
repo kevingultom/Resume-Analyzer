@@ -14,6 +14,8 @@ export const translations = {
     errorInvalidType: "Hanya file PDF yang didukung.",
     errorTooLarge: "Ukuran file terlalu besar. Maksimal 10MB.",
     errorGeneric: "Terjadi kesalahan. Silakan coba lagi.",
+    errorTimeout:
+      "Analisis memakan waktu terlalu lama dan dihentikan oleh server. Coba lagi dengan CV yang lebih singkat.",
     analyzeAnother: "Analisis CV lain",
     overallScoreTitle: "Skor Keseluruhan CV",
     overallScoreDesc:
@@ -42,6 +44,8 @@ export const translations = {
     errorInvalidType: "Only PDF files are supported.",
     errorTooLarge: "File is too large. Maximum size is 10MB.",
     errorGeneric: "Something went wrong. Please try again.",
+    errorTimeout:
+      "The analysis took too long and was stopped by the server. Try again with a shorter resume.",
     analyzeAnother: "Analyze another resume",
     overallScoreTitle: "Overall Resume Score",
     overallScoreDesc:
