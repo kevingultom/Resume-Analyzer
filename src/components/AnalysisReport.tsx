@@ -33,37 +33,37 @@ export default function AnalysisReport({ result }: { result: AnalysisResult }) {
 
   return (
     <div className="w-full max-w-4xl mx-auto animate-fade-in">
-      <div className="mb-8 flex flex-col items-center rounded-2xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-        <ScoreRing score={result.overall_score} size={180} />
-        <h2 className="mt-4 text-xl font-bold text-slate-800 dark:text-slate-100">
+      <div className="mb-6 flex flex-col items-center rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:mb-8 sm:rounded-2xl sm:p-8">
+        <ScoreRing score={result.overall_score} size={140} sizeSm={180} />
+        <h2 className="mt-3 text-base font-bold text-slate-800 dark:text-slate-100 sm:mt-4 sm:text-xl">
           {t.overallScoreTitle}
         </h2>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 text-center max-w-md">
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-md sm:text-sm">
           {t.overallScoreDesc}
         </p>
       </div>
 
-      <h3 className="mb-4 text-lg font-bold text-slate-800 dark:text-slate-100">
+      <h3 className="mb-3 text-base font-bold text-slate-800 dark:text-slate-100 sm:mb-4 sm:text-lg">
         {t.sectionBreakdown}
       </h3>
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mb-6 grid grid-cols-1 gap-3 sm:mb-8 sm:grid-cols-2 sm:gap-4">
         <SectionCard title={t.sectionSummary} icon={icons.summary} data={result.sections.summary} />
         <SectionCard title={t.sectionExperience} icon={icons.experience} data={result.sections.experience} />
         <SectionCard title={t.sectionSkills} icon={icons.skills} data={result.sections.skills} />
         <SectionCard title={t.sectionEducation} icon={icons.education} data={result.sections.education} />
       </div>
 
-      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="rounded-xl border border-green-200 bg-green-50 p-5 dark:border-green-900/50 dark:bg-green-950/30">
-          <h3 className="mb-3 flex items-center gap-2 font-semibold text-green-800 dark:text-green-400">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+      <div className="mb-6 grid grid-cols-1 gap-3 sm:mb-8 sm:gap-4 md:grid-cols-2">
+        <div className="rounded-lg border border-green-200 bg-green-50 p-3.5 dark:border-green-900/50 dark:bg-green-950/30 sm:rounded-xl sm:p-5">
+          <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-green-800 dark:text-green-400 sm:mb-3 sm:gap-2 sm:text-base">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 sm:h-5 sm:w-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
             {t.strengths}
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 sm:space-y-2">
             {result.strengths.map((item, i) => (
-              <li key={i} className="flex gap-2 text-sm text-green-900 dark:text-green-200">
+              <li key={i} className="flex gap-2 text-xs text-green-900 dark:text-green-200 sm:text-sm">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
                 {item}
               </li>
@@ -71,16 +71,16 @@ export default function AnalysisReport({ result }: { result: AnalysisResult }) {
           </ul>
         </div>
 
-        <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/50 dark:bg-amber-950/30">
-          <h3 className="mb-3 flex items-center gap-2 font-semibold text-amber-800 dark:text-amber-400">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-3.5 dark:border-amber-900/50 dark:bg-amber-950/30 sm:rounded-xl sm:p-5">
+          <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-amber-800 dark:text-amber-400 sm:mb-3 sm:gap-2 sm:text-base">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 sm:h-5 sm:w-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
             </svg>
             {t.improvements}
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 sm:space-y-2">
             {result.improvements.map((item, i) => (
-              <li key={i} className="flex gap-2 text-sm text-amber-900 dark:text-amber-200">
+              <li key={i} className="flex gap-2 text-xs text-amber-900 dark:text-amber-200 sm:text-sm">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                 {item}
               </li>
@@ -89,18 +89,18 @@ export default function AnalysisReport({ result }: { result: AnalysisResult }) {
         </div>
       </div>
 
-      <div className="rounded-xl border border-brand-200 bg-brand-50 p-5 dark:border-brand-900/50 dark:bg-brand-950/30">
-        <h3 className="mb-3 flex items-center gap-2 font-semibold text-brand-800 dark:text-brand-400">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+      <div className="rounded-lg border border-brand-200 bg-brand-50 p-3.5 dark:border-brand-900/50 dark:bg-brand-950/30 sm:rounded-xl sm:p-5">
+        <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-brand-800 dark:text-brand-400 sm:mb-3 sm:gap-2 sm:text-base">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 sm:h-5 sm:w-5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
           </svg>
           {t.suitableRoles}
         </h3>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {result.suitable_roles.map((role, i) => (
             <span
               key={i}
-              className="rounded-full bg-white border border-brand-300 px-3 py-1.5 text-sm font-medium text-brand-700 shadow-sm dark:bg-slate-800 dark:border-brand-800 dark:text-brand-300"
+              className="rounded-full bg-white border border-brand-300 px-2.5 py-1 text-xs font-medium text-brand-700 shadow-sm dark:bg-slate-800 dark:border-brand-800 dark:text-brand-300 sm:px-3 sm:py-1.5 sm:text-sm"
             >
               {role}
             </span>

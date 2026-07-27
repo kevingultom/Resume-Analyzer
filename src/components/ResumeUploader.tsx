@@ -84,7 +84,7 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`relative flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-10 text-center cursor-pointer transition-colors
+        className={`relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center cursor-pointer transition-colors sm:gap-3 sm:rounded-2xl sm:p-10
           ${
             isDragging
               ? "border-brand-500 bg-brand-50 dark:border-brand-400 dark:bg-brand-950/30"
@@ -99,14 +99,14 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
           onChange={(e) => validateAndSetFile(e.target.files?.[0])}
         />
 
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/40 sm:h-14 sm:w-14">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
-            className="h-7 w-7 text-brand-600 dark:text-brand-400"
+            className="h-6 w-6 text-brand-600 dark:text-brand-400 sm:h-7 sm:w-7"
           >
             <path
               strokeLinecap="round"
@@ -118,19 +118,19 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
 
         {file ? (
           <div>
-            <p className="font-medium text-slate-800 dark:text-slate-100">
+            <p className="text-sm font-medium text-slate-800 dark:text-slate-100 sm:text-base">
               {file.name}
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
               {(file.size / 1024 / 1024).toFixed(2)} MB — {t.replaceHint}
             </p>
           </div>
         ) : (
           <div>
-            <p className="font-medium text-slate-700 dark:text-slate-200">
+            <p className="text-sm font-medium text-slate-700 dark:text-slate-200 sm:text-base">
               {t.dropzoneTitle}
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
               {t.dropzoneSubtitle}
             </p>
           </div>
@@ -138,7 +138,7 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
       </div>
 
       {error && (
-        <p className="mt-3 text-sm text-red-600 dark:text-red-400 text-center">
+        <p className="mt-3 text-xs text-red-600 dark:text-red-400 text-center sm:text-sm">
           {error}
         </p>
       )}
@@ -146,12 +146,12 @@ export default function ResumeUploader({ onResult }: ResumeUploaderProps) {
       <button
         onClick={handleAnalyze}
         disabled={!file || isAnalyzing}
-        className="mt-6 w-full rounded-xl bg-brand-600 px-6 py-3.5 text-center font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700"
+        className="mt-4 w-full rounded-lg bg-brand-600 px-5 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700 sm:mt-6 sm:rounded-xl sm:px-6 sm:py-3.5 sm:text-base"
       >
         {isAnalyzing ? (
           <span className="flex items-center justify-center gap-2">
             <svg
-              className="h-5 w-5 animate-spin text-white"
+              className="h-4 w-4 animate-spin text-white sm:h-5 sm:w-5"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
