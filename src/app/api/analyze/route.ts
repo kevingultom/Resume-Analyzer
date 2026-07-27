@@ -4,7 +4,8 @@ import { analyzeResumeText } from "@/lib/gemini";
 import type { Language } from "@/lib/translations";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
+// Vercel Hobby plan caps serverless functions at 10s; Pro/Enterprise allow more.
+export const maxDuration = 10;
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
